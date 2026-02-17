@@ -310,8 +310,18 @@ body::before {
     box-shadow: 0 10px 30px rgba(0,0,0,0.2);
 }
 
+.gift-image {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+
 .gift-image img {
     animation: float 3s ease-in-out infinite;
+    max-width: 80%; 
+    height: auto;
+    display: block;
 }
 
 @keyframes float {
