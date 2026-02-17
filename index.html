@@ -1,21 +1,308 @@
-<head runat="server">
-<title>Trabajando en la Solución</title>
-
-<style type="text/css">
-.auto-style1 {
-	text-align: center;
-}
-</style>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invitación XV Años - Mariana</title>
+    
+    <!-- Fuentes de Google -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Playfair+Display:wght@400;700&family=Raleway:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <!-- Iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    
+    <!-- Nuestros estilos -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="https://cdn-icons-png.flaticon.com/512/3291/3291667.png">
 </head>
+
+
+
+
 <body>
-<form id="form1" runat="server">
-<div class="auto-style1" style="background-color: #960000">
-	<p>Hola Mundo</p>
-	<!-- <img alt="suspendido" height="700" src="octubre2018-002.jpg" width="800"> -->
+    <!-- Fondo animado -->
+    <div class="particles" id="particles-js"></div>
+    
+    <!-- Contenedor principal -->
+    <div class="container">
+
+
+
+
+       <!-- Encabezado con tema Rapunzel -->
+        <header class="header">
+    
+            <!-- Contenido principal -->
+            <div class="header-content">
+                <div class="diamond animate__animated animate__pulse animate__infinite">
+                    <i class="fas fa-crown"></i>
+                </div>
+
+                <h1>XV Años Mágicos</h1>
+                <h2>Mariana</h2>
+
+                <p class="subtitle">
+                    <i class="fas fa-star"></i> 
+                    Un cuento de hadas hecho realidad 
+                    <i class="fas fa-star"></i>
+                </p>
+            </div>
+
+        </header>
+
+
+
+
+
+
+        <!-- Sección de bienvenida -->
+        <section class="section welcome">
+            <div class="invitation-card animate__animated animate__zoomIn animate__delay-1s">
+                <p class="quote">
+                    <i class="fas fa-quote-left"></i>
+                    Hace 15 años nació una niña hermosa enviada por dios para ser criada y formada como el más grande tesoro. 
+                    Ahí momento en la vida donde imaginamos, soñamos y esperamos. Y a llegado uno de esos momentos
+                    <i class="fas fa-quote-right"></i>
+                </p>
+                <div class="signature">Con cariño</div>
+            </div>
+        </section>
+
+
+
+
+
+
+        <!-- Detalles del evento -->
+        <section class="section details">
+            <h3><i class="fas fa-calendar-alt"></i> Detalles del Evento</h3>
+            <div class="details-grid">
+                <div class="detail-item animate__animated">
+                    <div class="icon-circle">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h4>Fecha y Hora</h4>
+                    <p>27 de Junio, 2026</p>
+                    <p>Parroquia de Nuestra Señora</p>
+                    <p>del Carmen y San José</p>
+                    <p class="highlight">18:00 PM</p>
+                     <button class="map-btn" onclick="openMapIglesia()">
+                        <i class="fas fa-directions"></i> Ver en Mapa
+                    </button>
+                </div>
+                
+                <div class="detail-item animate__animated">
+                    <div class="icon-circle">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h4>Salón</h4>
+                    <p>Los Candiles</p>
+                    <p class="highlight">C. Tepetlapa 2075, Coapa, Coyoacán, 04918 Ciudad de México, CDMX</p>
+                    <button class="map-btn" onclick="openMap()">
+                        <i class="fas fa-directions"></i> Ver en Mapa
+                    </button>
+                </div>
+                
+                <div class="detail-item animate__animated">
+                    <div class="icon-circle">
+                        <i class="fas fa-vest"></i>
+                    </div>
+                    <h4>Código de Vestimenta</h4>
+                    <p>Casual</p>
+                    <!-- <p class="highlight">Vestido largo / Traje</p> -->
+                </div>
+            </div>
+        </section>
+
+
+
+
+        <!-- Contador regresivo -->
+        <section class="section countdown">
+            <h3><i class="fas fa-hourglass-half"></i> Faltan</h3>
+            <div class="countdown-container">
+                <div class="countdown-item">
+                    <div class="number" id="days">00</div>
+                    <div class="label">Días</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="number" id="hours">00</div>
+                    <div class="label">Horas</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="number" id="minutes">00</div>
+                    <div class="label">Minutos</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="number" id="seconds">00</div>
+                    <div class="label">Segundos</div>
+                </div>
+            </div>
+        </section>
+
+
+
+
+        <!-- Lluvia de Sobres -->
+        <section class="section gift">
+            <h3><i class="fas fa-envelope"></i> Lluvia de Sobres</h3>
+            
+            <div class="gift-card">
+                
+                <div class="gift-image">
+                    <img src="sobre.png" alt="Sobre regalo">
+                </div>
+                
+                <!-- <p>
+                    Tu presencia es el mejor regalo, pero si deseas tener un detalle conmigo,
+                    agradezco de corazón tu apoyo en efectivo el día del evento.
+                </p>
+                 -->
+            </div>
+        </section>
+
+
+
+        <!-- Confirmación -->
+        <section class="section confirmation">
+            <h3><i class="fab fa-whatsapp"></i> Confirma Tu Asistencia </h3>
+            <p>Por favor, confirma antes del 15 de Junio, 2026</p>
+            
+            <div class="confirmation-options">
+                <button class="confirm-btn yes" onclick="confirmAttendance('si')">
+                    <i class="fas fa-check-circle"></i> ¡Sí, asistiré!
+                </button>
+                <button class="confirm-btn no" onclick="confirmAttendance('no')">
+                    <i class="fas fa-times-circle"></i> No podré asistir
+                </button>
+            </div>
+            
+           <!--  <div class="guest-count">
+                <p>Número de invitados:</p>
+                <div class="counter">
+                    <button onclick="changeGuests(-1)">-</button>
+                    <span id="guestNumber">1</span>
+                    <button onclick="changeGuests(1)">+</button>
+                </div>
+            </div> -->
+            
+            <div class="message-box">
+                <p id="confirmationMessage"></p>
+            </div>
+        </section>
+
+
+
+
+
+        <!-- Música -->
+        <div class="music-player">
+            <button id="musicToggle" onclick="toggleMusic()">
+                <i class="fas fa-music"></i>
+                <span id="musicText"> Activar Música</span>
+            </button>
+           <!-- En la sección del reproductor de música -->
+            <audio id="backgroundMusic" loop>
+                <!-- Puedes usar esta música de Rapunzel -->
+                <source src="https://assets.mixkit.co/music/preview/mixkit-magical-fairytale-901.mp3" type="audio/mpeg">
+                <!-- O esta alternativa -->
+                <source src="https://assets.mixkit.co/music/preview/mixkit-mysterious-magical-illusion-948.mp3" type="audio/mpeg">
+            </audio>
+        </div>
+
+
+
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Con la bendición de Dios y el amor de mi familia</p>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-whatsapp"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fas fa-envelope"></i></a>
+            </div>
+            <p class="copyright">© 2026 - Invitación Digital creada con ❤️ por <a href="https://www.facebook.com/locoxcrear/"> locoxcrear</a></p>
+        </footer>
+    </div>
+
+
+
+
+
+<!-- Modal de WhatsApp -->
+<div id="whatsappModal" class="modal">
+    <div class="modal-content whatsapp-modal">
+        <span class="close-modal" onclick="closeWhatsAppModal()">&times;</span>
+        
+        <div class="whatsapp-header">
+            <i class="fab fa-whatsapp" style="color: #25D366; font-size: 3rem;"></i>
+            <h3>Confirmar por WhatsApp</h3>
+            <p>Selecciona a quién deseas enviar tu confirmación</p>
+        </div>
+        
+        <div class="whatsapp-contacts">
+            <div class="contact-card" onclick="sendToWhatsApp('5215512345678', 'Mamá')">
+                <div class="contact-avatar">
+                    <i class="fas fa-female"></i>
+                </div>
+                <div class="contact-info">
+                    <h4>Mamá de Mariana</h4>
+                    <p>Enviar confirmación</p>
+                </div>
+                <i class="fas fa-chevron-right"></i>
+            </div>
+            
+            <div class="contact-card" onclick="sendToWhatsApp('5215598765432', 'Papá')">
+                <div class="contact-avatar">
+                    <i class="fas fa-male"></i>
+                </div>
+                <div class="contact-info">
+                    <h4>Papá de Mariana</h4>
+                    <p>Enviar confirmación</p>
+                </div>
+                <i class="fas fa-chevron-right"></i>
+            </div>
+            
+            <div class="contact-card" onclick="sendToWhatsApp('5215534567890', 'Gabriela')">
+                <div class="contact-avatar">
+                    <i class="fas fa-birthday-cake"></i>
+                </div>
+                <div class="contact-info">
+                    <h4>Mariana</h4>
+                    <p>Enviar mensaje directo</p>
+                </div>
+                <i class="fas fa-chevron-right"></i>
+            </div>
+        </div>
+        
+        <div class="whatsapp-preview">
+            <h4>Vista previa del mensaje:</h4>
+            <div class="message-preview" id="messagePreview">
+                <!-- Se llena con JavaScript -->
+            </div>
+        </div>
+        
+        <button class="whatsapp-send-btn" onclick="sendWhatsAppMessage()">
+            <i class="fab fa-whatsapp"></i> Abrir WhatsApp
+        </button>
+    </div>
 </div>
-</form>
-<footer class="auto-style1" style="font-size: smaller;font-family: monospace;">
-	Atte: <br/>
-	Sistemas Administrativos de Recursos Humanos 
-</footer>
+
+
+
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="script.js"></script>
 </body>
+</html>
+
+
+
