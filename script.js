@@ -383,7 +383,7 @@ function confirmAttendance(response) {
 
 // Abrir WhatsApp para confirmar ASISTENCIA
 function openWhatsAppConfirmation() {
-    const phoneNumber = "5215512345678"; // Tu número aquí
+    const phoneNumber = "0000000000"; // Tu número aquí
     
     const message = `✨ *¡Hola! Confirmo mi asistencia al sueño mágico de Rapunzel!* ✨
 
@@ -412,7 +412,7 @@ function openWhatsAppConfirmation() {
 
 // Abrir WhatsApp para decir que NO puede asistir
 function openWhatsAppRegret() {
-    const phoneNumber = "5215512345678"; // Mismo número
+    const phoneNumber = "0000000000"; // Mismo número
     
     const message = `¡Hola! Lamento informar que *no podré asistir* a tus XV Años.\n\n` +
                    `❌ *Asistiré:* No\n` +
@@ -478,9 +478,9 @@ function changeGuests(change) {
 // Opcional: Selector de número de WhatsApp
 function selectWhatsAppNumber() {
     const numbers = [
-        { name: "Mamá de Mariana", number: "5215512345678" },
-        { name: "Papá de Mariana", number: "5215598765432" },
-        { name: "Mariana", number: "5215534567890" }
+        { name: "Mamá de Mariana", number: "0000000000" },
+        { name: "Papá de Mariana", number: "0000000000" },
+        { name: "Mariana", number: "00000000000" }
     ];
     
     let optionsText = "¿A qué número deseas enviar tu confirmación?\n\n";
@@ -508,7 +508,7 @@ function selectWhatsAppNumber() {
 
 
 // Variables para WhatsApp
-let selectedWhatsAppNumber = "5215512345678";
+let selectedWhatsAppNumber = "0000000000";
 let selectedContactName = "Mamá";
 
 // Mostrar modal de WhatsApp
