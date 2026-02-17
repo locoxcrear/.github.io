@@ -1,80 +1,171 @@
-// Inicializar partículas
-document.addEventListener('DOMContentLoaded', function() {
-    // Configuración de partículas
-    particlesJS('particles-js', {
-        particles: {
-            number: { value: 80, density: { enable: true, value_area: 800 } },
-            color: { value: "#ffd700" },
-            shape: { type: "circle" },
-            opacity: { value: 0.5, random: true },
-            size: { value: 3, random: true },
-            line_linked: {
-                enable: true,
-                distance: 150,
-                color: "#ffed4e",
-                opacity: 0.2,
-                width: 1
-            },
-            move: {
-                enable: true,
-                speed: 2,
-                direction: "none",
-                random: true,
-                straight: false,
-                out_mode: "out",
-                bounce: false
-            }
-        },
-        interactivity: {
-            detect_on: "canvas",
-            events: {
-                onhover: { enable: true, mode: "repulse" },
-                onclick: { enable: true, mode: "push" }
-            }
-        },
-        retina_detect: true
-    });
+// Crear lámparas flotantes
+function createLanterns() {
+    const container = document.querySelector('.floating-lanterns');
+    if (!container) return;
 
-    // Inicializar contador
-    initializeCountdown();
-    
-    // Inicializar animaciones al scroll
-    initializeScrollAnimations();
-    
-    // Reproducir música automáticamente (con interacción del usuario)
-    setupMusicAutoplay();
-});
+    for (let i = 0; i < 15; i++) {
+        const lantern = document.createElement('div');
+        lantern.className = 'lantern';
 
-// Contador regresivo
-function initializeCountdown() {
-    const eventDate = new Date('June 15, 2025 19:00:00').getTime();
-    
-    function updateCountdown() {
-        const now = new Date().getTime();
-        const timeLeft = eventDate - now;
-        
-        if (timeLeft > 0) {
-            const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
-            
-            document.getElementById('days').textContent = days.toString().padStart(2, '0');
-            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
-            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
-            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
-        } else {
-            document.querySelector('.countdown-container').innerHTML = 
-                '<div class="event-started">¡El evento ha comenzado!</div>';
-        }
+        const left = Math.random() * 100;
+        const top = Math.random() * 100;
+        const delay = Math.random() * 10;
+        const duration = 10 + Math.random() * 10;
+
+        lantern.style.cssText = `
+            left: ${left}%;
+            top: ${top}%;
+            animation-delay: ${delay}s;
+            animation-duration: ${duration}s;
+            opacity: ${0.3 + Math.random() * 0.5};
+        `;
+
+        container.appendChild(lantern);
     }
-    
-    updateCountdown();
-    setInterval(updateCountdown, 1000);
 }
 
-// Animaciones al hacer scroll
-function initializeScrollAnimations() {
+// Crear efecto de cabello brillante
+function createHairEffect() {
+    const hair = document.querySelector('.hair');
+    if (hair) {
+        setInterval(() => {
+            const spark = document.createElement('div');
+            spark.className = 'spark';
+            spark.innerHTML = '✨';
+            spark.style.cssText = `
+                position: absolute;
+                font-size: 20px;
+                animation: sparkle 1s ease-out forwards;
+                z-index: 100;
+            `;
+            
+            // Posición aleatoria en el cabello
+            const x = 20 + Math.random() * 60;
+            const y = Math.random() * 100;
+            
+            spark.style.left = `${x}%`;
+            spark.style.top = `${y}%`;
+            
+            hair.appendChild(spark);
+            
+            // Remover después de la animación
+            setTimeout(() => spark.remove(), 1000);
+        }, 500);
+    }
+}
+
+// Efecto de confeti mágico
+function createMagicConfetti() {
+    const emojis = ['✨', '🌟', '🎉', '🌸', '🌼', '💫', '⚡', '💖', '🎊'];
+    const container = document.querySelector('.container');
+    
+    for (let i = 0; i < 50; i++) {
+        const confetti = document.createElement('div');
+        confetti.className = 'magic-confetti';
+        confetti.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
+        confetti.style.cssText = `
+            position: fixed;
+            font-size: ${20 + Math.random() * 20}px;
+            left: ${Math.random() * 100}%;
+            top: -50px;
+            z-index: 1000;
+            pointer-events: none;
+            animation: magicFall ${3 + Math.random() * 5}s linear forwards;
+        `;
+        
+        document.body.appendChild(confetti);
+        
+        // Remover después
+        setTimeout(() => confetti.remove(), 8000);
+    }
+    
+    // Agregar estilos para la animación
+    if (!document.querySelector('#magicStyles')) {
+        const style = document.createElement('style');
+        style.id = 'magicStyles';
+        style.textContent = `
+            @keyframes magicFall {
+                0% {
+                    transform: translateY(0) rotate(0deg) scale(0);
+                    opacity: 0;
+                }
+                10% {
+                    opacity: 1;
+                    transform: translateY(0) rotate(0deg) scale(1);
+                }
+                100% {
+                    transform: translateY(100vh) rotate(${360 * 3}deg) scale(0.5);
+                    opacity: 0;
+                }
+            }
+            @keyframes sparkle {
+                0% { transform: scale(0) rotate(0deg); opacity: 0; }
+                50% { transform: scale(1.5) rotate(180deg); opacity: 1; }
+                100% { transform: scale(0) rotate(360deg); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+    }
+}
+
+// Efecto de brillo al pasar el mouse
+function addHoverEffects() {
+    const elements = document.querySelectorAll('.detail-item, .confirm-btn, .gallery-item');
+    
+    elements.forEach(el => {
+        el.addEventListener('mouseenter', function() {
+            this.style.boxShadow = '0 15px 30px rgba(138, 43, 226, 0.3)';
+            
+            // Crear partículas de brillo
+            if (!this.querySelector('.hover-sparkles')) {
+                const sparkles = document.createElement('div');
+                sparkles.className = 'hover-sparkles';
+                sparkles.innerHTML = '✨✨';
+                sparkles.style.cssText = `
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-size: 30px;
+                    opacity: 0;
+                    animation: sparkleFade 0.5s ease;
+                    pointer-events: none;
+                `;
+                this.appendChild(sparkles);
+                
+                // Remover después
+                setTimeout(() => sparkles.remove(), 500);
+            }
+        });
+        
+        el.addEventListener('mouseleave', function() {
+            this.style.boxShadow = '';
+        });
+    });
+}
+
+// Inicializar efectos mágicos cuando cargue la página
+document.addEventListener('DOMContentLoaded', function() {
+    // Crear efectos visuales
+    createLanterns();
+    createHairEffect();
+    addHoverEffects();
+    
+    // Efecto especial al hacer scroll
+    window.addEventListener('scroll', function() {
+        const scrollY = window.scrollY;
+        const lanterns = document.querySelector('.floating-lanterns');
+        
+        if (lanterns) {
+            lanterns.style.transform = `translateY(${scrollY * 0.1}px)`;
+        }
+    });
+    
+    // Efecto de entrada para elementos
     const observerOptions = {
         threshold: 0.1,
         rootMargin: '0px 0px -50px 0px'
@@ -84,214 +175,53 @@ function initializeScrollAnimations() {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('animate__animated', 'animate__fadeInUp');
+                
+                // Efecto especial para algunos elementos
+                if (entry.target.classList.contains('detail-item')) {
+                    setTimeout(() => {
+                        createMagicConfetti();
+                    }, 300);
+                }
             }
         });
     }, observerOptions);
     
-    // Observar elementos para animar
-    document.querySelectorAll('.detail-item, .gallery-item').forEach(el => {
+    // Observar elementos
+    document.querySelectorAll('.section, .detail-item, .gallery-item').forEach(el => {
         observer.observe(el);
     });
-}
-
-// Música
-function setupMusicAutoplay() {
-    const music = document.getElementById('backgroundMusic');
-    const musicToggle = document.getElementById('musicToggle');
-    const musicText = document.getElementById('musicText');
-    
-    // Intentar reproducir automáticamente después de interacción del usuario
-    document.body.addEventListener('click', function initMusic() {
-        if (music.paused) {
-            music.volume = 0.5;
-            music.play().then(() => {
-                musicText.textContent = ' Música: ON';
-                musicToggle.innerHTML = '<i class="fas fa-volume-up"></i>' + musicText.textContent;
-            }).catch(() => {
-                musicText.textContent = ' Activar Música';
-            });
-        }
-        document.body.removeEventListener('click', initMusic);
-    }, { once: true });
-}
-
-function toggleMusic() {
-    const music = document.getElementById('backgroundMusic');
-    const musicText = document.getElementById('musicText');
-    const icon = document.querySelector('#musicToggle i');
-    
-    if (music.paused) {
-        music.play();
-        musicText.textContent = ' Música: ON';
-        icon.className = 'fas fa-volume-up';
-    } else {
-        music.pause();
-        musicText.textContent = ' Música: OFF';
-        icon.className = 'fas fa-volume-mute';
-    }
-}
-
-// Confirmar asistencia
-let confirmationTimeout;
-
-function confirmAttendance(response) {
-    const messageBox = document.getElementById('confirmationMessage');
-    const guestNumber = document.getElementById('guestNumber').textContent;
-    
-    clearTimeout(confirmationTimeout);
-    
-    if (response === 'si') {
-        messageBox.innerHTML = `
-            <i class="fas fa-heart" style="color:#ffd700; margin-right:10px;"></i>
-            <strong>¡Gracias por confirmar!</strong> Esperamos verte junto a ${guestNumber} invitado${guestNumber > 1 ? 's' : ''}. 
-            Te hemos enviado los detalles por WhatsApp.
-        `;
-        messageBox.style.color = '#4CAF50';
-        
-        // Efecto de confeti visual
-        createConfetti();
-    } else {
-        messageBox.innerHTML = `
-            <i class="fas fa-heart-broken" style="color:#ffd700; margin-right:10px;"></i>
-            <strong>Lamentamos que no puedas asistir.</strong> Agradecemos tu respuesta. 
-            ¡Te extrañaremos en esta celebración especial!
-        `;
-        messageBox.style.color = '#f44336';
-    }
-    
-    messageBox.classList.add('animate__animated', 'animate__pulse');
-    
-    // Guardar en localStorage (simulación)
-    localStorage.setItem('attendance', JSON.stringify({
-        response: response,
-        guests: guestNumber,
-        date: new Date().toISOString()
-    }));
-    
-    confirmationTimeout = setTimeout(() => {
-        messageBox.classList.remove('animate__pulse');
-    }, 2000);
-}
-
-// Cambiar número de invitados
-function changeGuests(change) {
-    const guestNumber = document.getElementById('guestNumber');
-    let current = parseInt(guestNumber.textContent);
-    current += change;
-    
-    if (current < 1) current = 1;
-    if (current > 10) current = 10;
-    
-    guestNumber.textContent = current;
-    
-    // Efecto de animación
-    guestNumber.classList.add('animate__animated', 'animate__bounce');
-    setTimeout(() => {
-        guestNumber.classList.remove('animate__bounce');
-    }, 300);
-}
-
-// Efecto de confeti
-function createConfetti() {
-    const confettiCount = 50;
-    const container = document.querySelector('.confirmation');
-    
-    for (let i = 0; i < confettiCount; i++) {
-        const confetti = document.createElement('div');
-        confetti.className = 'confetti';
-        confetti.innerHTML = '🎉';
-        confetti.style.cssText = `
-            position: absolute;
-            font-size: 20px;
-            left: ${Math.random() * 100}%;
-            top: -20px;
-            animation: fall ${1 + Math.random() * 2}s linear forwards;
-            z-index: 1000;
-        `;
-        
-        document.body.appendChild(confetti);
-        
-        // Remover después de la animación
-        setTimeout(() => {
-            confetti.remove();
-        }, 3000);
-    }
-    
-    // Añadir estilo de animación
-    if (!document.querySelector('#confettiStyle')) {
-        const style = document.createElement('style');
-        style.id = 'confettiStyle';
-        style.textContent = `
-            @keyframes fall {
-                to {
-                    transform: translateY(100vh) rotate(${360 * 3}deg);
-                    opacity: 0;
-                }
-            }
-        `;
-        document.head.appendChild(style);
-    }
-}
-
-
-
-
-// Abrir mapa
-// function openMap() {
-//     const url = 'https://www.google.com/maps/place/Salón+Diamante/@19.4326077,-99.133207,17z/';
-//     window.open(url, '_blank');
-// }
-
-// // Efecto de cursor personalizado
-// document.addEventListener('mousemove', function(e) {
-//     const cursor = document.querySelector('.cursor') || createCursor();
-//     cursor.style.left = e.clientX + 'px';
-//     cursor.style.top = e.clientY + 'px';
-// });
-
-// function createCursor() {
-//     const cursor = document.createElement('div');
-//     cursor.className = 'cursor';
-//     cursor.style.cssText = `
-//         position: fixed;
-//         width: 20px;
-//         height: 20px;
-//         border: 2px solid #ffd700;
-//         border-radius: 50%;
-//         pointer-events: none;
-//         z-index: 9999;
-//         mix-blend-mode: difference;
-//         transition: transform 0.1s ease;
-//     `;
-//     document.body.appendChild(cursor);
-//     return cursor;
-// }
-
-
-
-
-
-
+});
 
 
 
 // Función para abrir Google Maps con tu dirección
 function openMap() {
-    // REEMPLAZA ESTA DIRECCIÓN CON LA DE TU EVENTO
-    const address = "Felipe Carrillo Puerto 632, Ventura Pérez de Alba, Miguel Hidalgo, 11410 Ciudad de México, CDMX";
-    
-    // Codificar la dirección para URL
-    const encodedAddress = encodeURIComponent(address);
-    
-    // URL de Google Maps
-    const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodedAddress}`;
-    
-    // Abrir en nueva pestaña
-    window.open(mapsUrl, '_blank');
-    
-    // Opcional: Mostrar confirmación
-    showMapConfirmation(address);
+    const exactMapUrl = "https://www.google.com/maps/place/Sal%C3%B3n+Los+Candiles/@19.3152027,-99.1078475,21z/data=!4m15!1m8!3m7!1s0x85ce018c8e3f927b:0x9efeca9e72425f01!2sC.+Tepetlapa+2075,+Coapa,+Alianza+Popular+Revolucionaria,+Coyoac%C3%A1n,+04918+Ciudad+de+M%C3%A9xico,+CDMX!3b1!8m2!3d19.3151438!4d-99.1077892!16s%2Fg%2F11c25_f3wn!3m5!1s0x85ce018c96879a7b:0x123c66e50b0f1700!8m2!3d19.3151335!4d-99.1078206!16s%2Fg%2F1tkp03ls?entry=ttu&g_ep=EgoyMDI2MDIxMS4wIKXMDSoASAFQAw%3D%3D";
+
+    window.open(exactMapUrl, '_blank');
+    showMapConfirmation("Salón Los Candiles, Ciudad de México");
 }
+
+
+
+// Función para abrir Google Maps con tu dirección
+function openMapIglesia() {
+    const exactMapUrl = "https://www.google.com/maps/place/Parroquia+de+Nuestra+Se%C3%B1ora+del+Carmen+y+San+Jos%C3%A9/@19.3011463,-99.1348311,20.5z/data=!4m15!1m8!3m7!1s0x85ce01af87bf062f:0xc7ee13df40a7839b!2sCalz.+De+Guadalupe+230,+Coapa,+Prado+Coapa,+Tlalpan,+14350+Ciudad+de+M%C3%A9xico,+CDMX!3b1!8m2!3d19.3014077!4d-99.1346447!16s%2Fg%2F11pyvy5b3r!3m5!1s0x85ce0060843e5987:0x3dc78852c98304ab!8m2!3d19.3014077!4d-99.1346447!16s%2Fg%2F1tdmf6cz?entry=ttu&g_ep=EgoyMDI2MDIxMS4wIKXMDSoASAFQAw%3D%3D";
+
+    window.open(exactMapUrl, '_blank');
+    showMapConfirmation("Salón Los Candiles, Ciudad de México");
+}
+
+
+
+
+
+
+
+
+
+
+
 
 // Mostrar mensaje de confirmación (opcional)
 function showMapConfirmation(address) {
@@ -355,7 +285,7 @@ if (!document.querySelector('#mapStyles')) {
 // Contador regresivo - FUNCIONA 100%
 function initializeCountdown() {
     // FECHA DEL EVENTO - CAMBIA ESTA LÍNEA CON TU FECHA
-    const eventDate = new Date('June 15, 2026 19:00:00').getTime();
+    const eventDate = new Date('June 27, 2026 18:00:00').getTime();
     
     // Actualizar cada segundo
     const countdownInterval = setInterval(updateCountdown, 1000);
@@ -426,15 +356,8 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // También puedes iniciarlo con un botón si prefieres
     console.log('Contador regresivo activado ✅');
-    console.log('Fecha del evento: 15 de Junio, 2025 a las 19:00');
+    console.log('Fecha del evento: 27 de Junio, 2026 a las 18:00');
 });
-
-
-
-
-
-
-
 
 
 
@@ -460,31 +383,27 @@ function confirmAttendance(response) {
 
 // Abrir WhatsApp para confirmar ASISTENCIA
 function openWhatsAppConfirmation() {
-    // TU NÚMERO DE TELÉFONO (sin espacios, con código de país)
-    const phoneNumber = "5215512345678"; // Ejemplo: México +52 55 1234 5678
+    const phoneNumber = "5215512345678"; // Tu número aquí
     
-    // Mensaje personalizado
-    const eventName = "Mis XV Años - Gabriela";
-    const guestCount = selectedGuests;
-    
-    const message = `¡Hola! Confirmo mi asistencia a *${eventName}*.\n\n` +
-                   `✅ *Asistiré:* Sí\n` +
-                   `👥 *Número de invitados:* ${guestCount}\n` +
-                   `📅 *Fecha:* 15 de Junio, 2025\n` +
-                   `⏰ *Hora:* 7:00 PM\n\n` +
-                   `¡Nos vemos en la celebración! 🎉`;
-    
-    // Codificar el mensaje para URL
+    const message = `✨ *¡Hola! Confirmo mi asistencia al sueño mágico de Rapunzel!* ✨
+
+👑 *Evento:* XV Años - [Tu Nombre]
+🎉 *Asistiré:* ¡Sí! Con mucha alegría
+👥 *Invitados:* ${selectedGuests}
+📅 *Fecha:* 27 de Junio, 2026
+⏰ *Hora:* 8:00 PM (Hora de la lámpara)
+🏰 *Salón:* Salón Los Candiles
+
+💜 *Mi nombre:* [ESCRIBE TU NOMBRE AQUÍ]
+🌸 *Mensaje especial:* ¡No puedo esperar para ver las lámparas flotantes!
+
+*¡Nos vemos en esta aventura mágica!* 🌟🎊`;
+
     const encodedMessage = encodeURIComponent(message);
-    
-    // URL de WhatsApp
     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
     
-    // Abrir WhatsApp
     window.open(whatsappUrl, '_blank');
-    
-    // Registrar en consola
-    console.log("WhatsApp abierto para confirmación:", whatsappUrl);
+    createMagicConfetti(); // Efecto especial
 }
 
 
@@ -559,9 +478,9 @@ function changeGuests(change) {
 // Opcional: Selector de número de WhatsApp
 function selectWhatsAppNumber() {
     const numbers = [
-        { name: "Mamá de Gabriela", number: "5215512345678" },
-        { name: "Papá de Gabriela", number: "5215598765432" },
-        { name: "Gabriela", number: "5215534567890" }
+        { name: "Mamá de Mariana", number: "5215512345678" },
+        { name: "Papá de Mariana", number: "5215598765432" },
+        { name: "Mariana", number: "5215534567890" }
     ];
     
     let optionsText = "¿A qué número deseas enviar tu confirmación?\n\n";
@@ -628,16 +547,16 @@ function updateMessagePreview() {
     let message = '';
     
     if (userResponse === 'si') {
-        message = `¡Hola ${selectedContactName}! Confirmo mi asistencia a *Mis XV Años - Gabriela*.\n\n` +
+        message = `¡Hola ${selectedContactName}! Confirmo mi asistencia a *Mis XV Años - Mariana*.\n\n` +
                  `✅ *Asistiré:* Sí\n` +
                  `👤 *Mi nombre:* [ESCRIBE TU NOMBRE AQUÍ]\n` +
                  `👥 *Número de invitados:* ${guestCount}\n` +
-                 `📅 *Fecha:* 15 de Junio, 2025\n` +
-                 `⏰ *Hora:* 7:00 PM\n` +
-                 `📍 *Lugar:* Salón Diamante\n\n` +
+                 `📅 *Fecha:* 27 de Junio, 2026\n` +
+                 `⏰ *Hora:* 8:00 PM\n` +
+                 `📍 *Salón:* Salón Los Candiles\n\n` +
                  `¡Nos vemos en la celebración! 🎉`;
     } else {
-        message = `¡Hola ${selectedContactName}! Lamento informar que *no podré asistir* a los XV Años de Gabriela.\n\n` +
+        message = `¡Hola ${selectedContactName}! Lamento informar que *no podré asistir* a los XV Años de Mariana.\n\n` +
                  `❌ *Asistiré:* No\n` +
                  `👤 *Mi nombre:* [ESCRIBE TU NOMBRE AQUÍ]\n` +
                  `💝 *Motivo:* [ESCRIBE TU MOTIVO AQUÍ]\n\n` +
@@ -654,16 +573,16 @@ function sendWhatsAppMessage() {
     let message = '';
     
     if (userResponse === 'si') {
-        message = `¡Hola! Confirmo mi asistencia a *Mis XV Años - Gabriela*.\n\n` +
+        message = `¡Hola! Confirmo mi asistencia a *Mis XV Años - Mariana*.\n\n` +
                  `✅ *Asistiré:* Sí\n` +
                  `👤 *Mi nombre:* [ESCRIBE TU NOMBRE AQUÍ]\n` +
                  `👥 *Número de invitados:* ${guestCount}\n` +
-                 `📅 *Fecha:* 15 de Junio, 2025\n` +
-                 `⏰ *Hora:* 7:00 PM\n` +
-                 `📍 *Lugar:* Salón Diamante\n\n` +
+                 `📅 *Fecha:* 27 de Junio, 2026\n` +
+                 `⏰ *Hora:* 8:00 PM\n` +
+                 `📍 *Salón:* Salón Los Candiles \n\n` +
                  `¡Nos vemos en la celebración! 🎉`;
     } else {
-        message = `¡Hola! Lamento informar que *no podré asistir* a los XV Años de Gabriela.\n\n` +
+        message = `¡Hola! Lamento informar que *no podré asistir* a los XV Años de Mariana.\n\n` +
                  `❌ *Asistiré:* No\n` +
                  `👤 *Mi nombre:* [ESCRIBE TU NOMBRE AQUÍ]\n` +
                  `💝 *Motivo:* [ESCRIBE TU MOTIVO AQUÍ]\n\n` +
@@ -678,6 +597,20 @@ function sendWhatsAppMessage() {
     
     // Mostrar mensaje de éxito
     showLocalMessage(userResponse);
+}
+
+
+function toggleMusic() {
+    const music = document.getElementById('backgroundMusic');
+    const text = document.getElementById('musicText');
+
+    if (music.paused) {
+        music.play();
+        text.textContent = " Pausar Música";
+    } else {
+        music.pause();
+        text.textContent = " Activar Música";
+    }
 }
 
 
