@@ -214,15 +214,6 @@ function openMapIglesia() {
 
 
 
-
-
-
-
-
-
-
-
-
 // Mostrar mensaje de confirmación (opcional)
 function showMapConfirmation(address) {
     const message = `Abriendo ubicación: ${address}`;
@@ -272,13 +263,6 @@ if (!document.querySelector('#mapStyles')) {
     styleEl.textContent = mapStyles;
     document.head.appendChild(styleEl);
 }
-
-
-
-
-
-
-
 
 
 
@@ -385,18 +369,16 @@ function confirmAttendance(response) {
 function openWhatsAppConfirmation() {
     const phoneNumber = "0000000000"; // Tu número aquí
     
-    const message = `✨ *¡Hola! Confirmo mi asistencia al sueño mágico de Rapunzel!* ✨
+    const message = `✨ *¡Hola! Confirmo mi asistencia!* ✨
 
 👑 *Evento:* XV Años - [Tu Nombre]
 🎉 *Asistiré:* ¡Sí! Con mucha alegría
 👥 *Invitados:* ${selectedGuests}
 📅 *Fecha:* 27 de Junio, 2026
 ⏰ *Hora:* 8:00 PM (Hora de la lámpara)
-🏰 *Salón:* Salón Los Candiles
+🏰 *Salón:* Los Candiles
 
 💜 *Mi nombre:* [ESCRIBE TU NOMBRE AQUÍ]
-🌸 *Mensaje especial:* ¡No puedo esperar para ver las lámparas flotantes!
-
 *¡Nos vemos en esta aventura mágica!* 🌟🎊`;
 
     const encodedMessage = encodeURIComponent(message);
@@ -500,13 +482,6 @@ function selectWhatsAppNumber() {
 
 
 
-
-
-
-
-
-
-
 // Variables para WhatsApp
 let selectedWhatsAppNumber = "0000000000";
 let selectedContactName = "Mamá";
@@ -573,7 +548,7 @@ function sendWhatsAppMessage() {
     let message = '';
     
     if (userResponse === 'si') {
-        message = `¡Hola! Confirmo mi asistencia a *Mis XV Años - Mariana*.\n\n` +
+        message = `¡Hola! Confirmo mi asistencia.\n\n` +
                  `✅ *Asistiré:* Sí\n` +
                  `👤 *Mi nombre:* [ESCRIBE TU NOMBRE AQUÍ]\n` +
                  `👥 *Número de invitados:* ${guestCount}\n` +
