@@ -54,7 +54,8 @@ body::before {
 
 
 .header {
-    background: url("Rapunzel11.jpg") center top / cover no-repeat;
+    /*background: url("Rapunzel11.jpg") center top / cover no-repeat;*/
+    background-image: url("./Rapunzel11.jpg");
     /*background-image: url("Rapunzel10.jpg"); /* Cambia por tu imagen */
     background-size: cover;
     background-position: center;
@@ -114,10 +115,9 @@ body::before {
     unicode-bidi: isolate;
 }
 
-.header {
+/*.header {
     background-attachment: fixed; 
-}
-
+}*/
 
 
 /*************  SOBRE *****************************************/
