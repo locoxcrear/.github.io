@@ -353,17 +353,20 @@ let userResponse = '';
 
 // Función principal para confirmar asistencia
 function confirmAttendance(response) {
-    userResponse = response;
-    
-    if (response === 'si') {
-        openWhatsAppConfirmation();
-    } else {
-        openWhatsAppRegret();
-    }
-    
-    // Mostrar mensaje local
-    showLocalMessage(response);
+    openWhatsAppModal(response);
 }
+// function confirmAttendance(response) {
+//     userResponse = response;
+    
+//     if (response === 'si') {
+//         openWhatsAppConfirmation();
+//     } else {
+//         openWhatsAppRegret();
+//     }
+    
+//     // Mostrar mensaje local
+//     showLocalMessage(response);
+// }
 
 // Abrir WhatsApp para confirmar ASISTENCIA
 function openWhatsAppConfirmation() {
@@ -588,6 +591,17 @@ function toggleMusic() {
     }
 }
 
+
+window.addEventListener('scroll', function() {
+    const welcome = document.querySelector('.section.welcome');
+    if (!welcome) return;
+
+    const rect = welcome.getBoundingClientRect();
+    const offset = window.pageYOffset;
+    const speed = 0.4;
+
+    welcome.style.setProperty('--parallaxY', `${offset * speed}px`);
+});
 
 
 
