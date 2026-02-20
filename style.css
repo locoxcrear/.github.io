@@ -54,7 +54,8 @@ body::before {
 
 
 .header {
-    background-image: url("Rapunzel10.jpg"); /* Cambia por tu imagen */
+    background: url("Rapunzel10.jpg") center top / cover no-repeat;
+    /*background-image: url("Rapunzel10.jpg"); /* Cambia por tu imagen */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -75,6 +76,7 @@ body::before {
     position: absolute;
     inset: 0;
     background: rgba(0, 0, 0, 0.4); /* Ajusta intensidad */
+    z-index: 0;
 }
 
 .header-content {
